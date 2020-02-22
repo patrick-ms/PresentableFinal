@@ -1,5 +1,6 @@
 package graficos;
 
+import entes.criatura.Jugador;
 import mapa.cuadro.Cuadro;
 
 public final class Pantalla {
@@ -36,7 +37,7 @@ public final class Pantalla {
 		
 		for(int y = 0; y < cuadro.sprite.getLado(); y++) {
 			int posicionY = y + compensacionY;
-			for(int x=0; x < cuadro.sprite.getLado(); x++) {
+			for(int x = 0; x < cuadro.sprite.getLado(); x++) {
 				int posicionX = x + compensacionX;
 				//Para evitar dibujar fuera de pantalla
 				if(posicionX < -cuadro.sprite.getLado() || posicionX >= ancho || posicionY < 0|| posicionY >= alto) {
@@ -45,7 +46,38 @@ public final class Pantalla {
 				if(posicionX < 0) {
 					posicionX = 0;
 				}
-				pixeles[posicionX + posicionY * ancho] = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
+				
+				int colorPixelCuadro = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
+				//diferente del color blanco, se puede omitir el else si el fondo restante del sprite es negro
+				if(colorPixelCuadro != 0xffffffff) {
+					pixeles[posicionX + posicionY * ancho] = colorPixelCuadro;
+				} else {
+					pixeles[posicionX + posicionY * ancho] = 0xff000000;
+				}
+			}
+		}
+	}
+	
+	public void mostrarJugador(int compensacionX, int compensacionY, Jugador jugador) {
+		compensacionX -= diferenciaX;
+		compensacionY -= diferenciaY;
+		
+		for(int y = 0; y < jugador.getSprite().getLado(); y++) {
+			int posicionY = y + compensacionY;
+			for(int x = 0; x < jugador.getSprite().getLado(); x++) {
+				int posicionX = x + compensacionX;
+				//Para evitar dibujar fuera de pantalla
+				if(posicionX < -jugador.getSprite().getLado() || posicionX >= ancho || posicionY < 0|| posicionY >= alto) {
+					break;
+				}
+				if(posicionX < 0) {
+					posicionX = 0;
+				}
+				
+				int colorPixelJugador = jugador.getSprite().pixeles[x + y * jugador.getSprite().getLado()];
+				if(colorPixelJugador != 0xff1b1919) {
+					pixeles[posicionX + posicionY * ancho] = colorPixelJugador;
+				}
 			}
 		}
 	}

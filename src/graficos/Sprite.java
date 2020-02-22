@@ -9,11 +9,17 @@ public final class Sprite {
 	public int[] pixeles;
 	private HojaSprites hoja;
 	
-	//Coleccion de sprites
+	//Coleccion de sprites del personaje
+	public static final Sprite PARADO = new Sprite(32, 0, 0, HojaSprites.jugador);
+	public static final Sprite CORRERDERECHA1 = new Sprite(32, 1, 0, HojaSprites.jugador);
+	public static final Sprite CORRERDERECHA2 = new Sprite(32, 2, 0, HojaSprites.jugador);	
+	//Fin de la coleccion
+	
+	//Coleccion de sprites del mapa
 	public static final Sprite VACIO = new Sprite(32, 0);
-	public static final Sprite SUELO = new Sprite(32, 0, 0, HojaSprites.componentesMapa);
-	public static final Sprite PLATAFORMA =new Sprite(32, 1, 0, HojaSprites.componentesMapa);
-	public static final Sprite PARED =new Sprite(32, 2, 0, HojaSprites.componentesMapa);
+	public static final Sprite SUELO = new Sprite(32, 0, 0, HojaSprites.mapa01);
+	public static final Sprite PLATAFORMA =new Sprite(32, 1, 0, HojaSprites.mapa01);
+	public static final Sprite PARED =new Sprite(32, 2, 0, HojaSprites.mapa01);
 	//Fin de la coleccion
 	
 	public Sprite(final int lado, final int columna, final int fila, final HojaSprites hoja) {

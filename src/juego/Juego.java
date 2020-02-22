@@ -12,7 +12,9 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import control.Teclado;
+import entes.criatura.Jugador;
 import graficos.Pantalla;
+import graficos.Sprite;
 import mapa.Mapa;
 import mapa.MapaCargado;
 
@@ -20,7 +22,7 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final int ANCHO = 800; 
+	private static final int ANCHO = 640; 
 	private static final int ALTO = 380;
 	
 	private static volatile boolean enFuncionamiento = false;
@@ -42,6 +44,7 @@ public class Juego extends Canvas implements Runnable{
 	private static Pantalla pantalla;
 	
 	private static Mapa mapa;
+	private static Jugador jugador;
 	
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 	
@@ -53,10 +56,12 @@ public class Juego extends Canvas implements Runnable{
 		pantalla = new Pantalla(ANCHO, ALTO);
 		//128 tiles ancho y alto
 //		mapa = new MapaGenerado(128, 128);
-		mapa = new MapaCargado("/mapas/mapaPrueba.png");
-		
+
 		teclado = new Teclado();
 		addKeyListener(teclado);
+		
+		mapa = new MapaCargado("/mapas/mapaPrueba.png");
+		jugador = new Jugador(teclado, Sprite.PARADO, 0, 63);
 		
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,19 +99,9 @@ public class Juego extends Canvas implements Runnable{
 	
 	private void actualizar() {
 		teclado.actualizar();
-		//arriba y abajo no necesario
-		if(teclado.arriba) {
-
-		}
-        if(teclado.abajo) {
 		
-		}
-        if(teclado.izquierda) {
-			x--;
-		}
-        if(teclado.derecha) {
-        	x++;
-        }
+		jugador.actualizar();
+		
         if(teclado.salir) {
         	System.exit(0);
         }
@@ -123,9 +118,9 @@ public class Juego extends Canvas implements Runnable{
 			return;
 		}
 		
-		pantalla.limpiar();
-		mapa.mostar(x, y, pantalla);
-		
+		// pantalla.limpiar();
+		mapa.mostar(jugador.getposicionX(), jugador.getposicionY(), pantalla);
+		jugador.mostrar(pantalla);
 		//metodo menos costoso para el ordenador
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
 		
@@ -138,10 +133,10 @@ public class Juego extends Canvas implements Runnable{
 		
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.red);
-		//Posicion del rectangulo
-		g.fillRect(10, 320, 32, 32);
 		g.drawString(CONTADOR_APS, 10, 20);
 		g.drawString(CONTADOR_FPS, 10, 35);
+		g.drawString("X: " + jugador.getposicionX(), 10, 50);
+		g.drawString("Y: " + jugador.getposicionY(), 10, 65);
 		g.dispose();
 		
 		estrategia.show();
