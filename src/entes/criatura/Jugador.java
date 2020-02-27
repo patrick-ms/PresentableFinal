@@ -7,6 +7,8 @@ import graficos.Sprite;
 public class Jugador extends Criatura{
 	private Teclado teclado;
 	
+	private int animacion;
+	
 	public Jugador(Teclado teclado,Sprite sprite) {
 		this.teclado = teclado;
 		this.sprite = sprite;
@@ -22,6 +24,12 @@ public class Jugador extends Criatura{
 		int desplazamientoX = 0;
 		int desplazamientoY = 0;
 		
+		if(animacion < Integer.MAX_VALUE) {
+			animacion++;
+		} else {
+			animacion = 0;
+		}			
+		
 		if(teclado.arriba) {
 			desplazamientoY--;
 		}	
@@ -29,29 +37,47 @@ public class Jugador extends Criatura{
 			desplazamientoY++;
 		}
 		if(teclado.izquierda) {
-			desplazamientoX--;
+			desplazamientoX = desplazamientoX - 100;
 		}
 		if(teclado.derecha) {
-			desplazamientoX++;
+			desplazamientoX = desplazamientoX + 100;
 		}
 		
 		if(desplazamientoX != 0 || desplazamientoY != 0) {
-			if(direccion !=0 || desplazamientoY != 0) {
-				if(direccion == 'n') {
-					//sprite = Sprite.ARRIBA0;
-				}
-				if(direccion == 's') {
-					//sprite = Sprite.ABAJO0;
-				}
-				if(direccion == 'w') {
-					//sprite = Sprite.IZQUIERDA0;
-				}
-				if(direccion == 'e') {
-					// = Sprite.DERECHA;
+			mover(desplazamientoX, desplazamientoY);
+			enMovimiento = true;
+		} else {
+			enMovimiento = false;
+		}
+		
+		if(direccion !=0 || desplazamientoY != 0) {
+			if(direccion == 'n') {
+				//sprite = Sprite.ARRIBA0;
+			}
+			if(direccion == 's') {
+				//sprite = Sprite.ABAJO0;
+			}
+			if(direccion == 'w') {
+				sprite = Sprite.PARADOPIZQUIERDA;
+				if(enMovimiento) {
+					if(animacion % 30 > 15) {
+						sprite = Sprite.CORRERIZQUIERDA1;
+					} else {
+						sprite = Sprite.CORRERIZQUIERDA2;
+					}
 				}
 			}
-			mover(desplazamientoX, desplazamientoY);
-		}
+			if(direccion == 'e') {
+				sprite = Sprite.PARADODERECHA;
+				if(enMovimiento) {
+					if(animacion % 30 > 15) {
+						sprite = Sprite.CORRERDERECHA1;
+					} else {
+						sprite = Sprite.CORRERDERECHA2;
+					}
+				}
+			}
+		} 
 	}
 	
 	public void mostrar(Pantalla pantalla) {

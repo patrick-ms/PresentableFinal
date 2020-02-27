@@ -22,8 +22,8 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final int ANCHO = 640; 
-	private static final int ALTO = 380;
+	private static final int ANCHO = 1280; 
+	private static final int ALTO = 720; //12*32
 	
 	private static volatile boolean enFuncionamiento = false;
 	
@@ -60,8 +60,8 @@ public class Juego extends Canvas implements Runnable{
 		teclado = new Teclado();
 		addKeyListener(teclado);
 		
-		mapa = new MapaCargado("/mapas/mapaPrueba.png");
-		jugador = new Jugador(teclado, Sprite.PARADO, 0, 63);
+		mapa = new MapaCargado("/mapas/mapaPrueba2.png");
+		jugador = new Jugador(teclado, Sprite.PARADODERECHA, 155, 286);
 		
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +119,7 @@ public class Juego extends Canvas implements Runnable{
 		}
 		
 		// pantalla.limpiar();
-		mapa.mostar(jugador.getposicionX(), jugador.getposicionY(), pantalla);
+		mapa.mostar(jugador.getposicionX() - pantalla.getAncho() / 2 + jugador.getSprite().getLado() / 2, jugador.getposicionY() - pantalla.getAlto() / 2 + jugador.getSprite().getLado() / 2, pantalla);
 		jugador.mostrar(pantalla);
 		//metodo menos costoso para el ordenador
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);

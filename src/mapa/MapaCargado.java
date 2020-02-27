@@ -46,6 +46,10 @@ public class MapaCargado extends Mapa{
 			case 0xffdd986f: 
 				cuadrosCatalogo[i] = Cuadro.PARED;
 				continue;	
+			
+			case 0xff4773de: 
+				cuadrosCatalogo[i] = Cuadro.CIELO;
+				continue;	
 				
 			default:
 				cuadrosCatalogo[i] = Cuadro.VACIO;

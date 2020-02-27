@@ -11,14 +11,14 @@ public class HojaSprites {
 	public final int [] pixeles;
 	
 	//coleccion de hojas de sprites
-	public static HojaSprites mapa01 = new HojaSprites("/texturas/hoja_sprites.png", 320, 320);	
+	public static HojaSprites mapa01 = new HojaSprites("/texturas/hoja_sprites2.png", 320, 320);	
 	public static HojaSprites jugador = new HojaSprites("/texturas/hoja_sprites_jugadorPrueba.png", 320, 320);
 	//fin de la coleccion 
 	
 	public HojaSprites(final String ruta, final int ancho, final int alto) {
 		this.ancho = ancho;
 		this.alto = alto;
-		
+
 		pixeles = new int[ancho * alto];
 		
 		BufferedImage imagen;

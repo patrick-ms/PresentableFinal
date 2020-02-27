@@ -16,6 +16,7 @@ public class Cuadro {
 	public static final Cuadro SUELO = new Cuadro(Sprite.SUELO);
 	public static final Cuadro PLATAFORMA = new Cuadro(Sprite.PLATAFORMA);
 	public static final Cuadro PARED = new Cuadro(Sprite.PARED);
+	public static final Cuadro CIELO = new Cuadro(Sprite.CIELO);
 	//Fin de la coleccion de cuadros
 	
 	public Cuadro(Sprite sprite) {

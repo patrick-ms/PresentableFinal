@@ -65,6 +65,8 @@ public abstract class Mapa {
 			return Cuadro.PLATAFORMA;
 		case 2:
 			return Cuadro.PARED;
+		case 3:
+			return Cuadro.CIELO;	
 		default:
 				return Cuadro.VACIO;
 		}
