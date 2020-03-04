@@ -2,7 +2,7 @@ package entes;
 
 import mapa.Mapa;
 
-public class Ente {
+public class  Ente{
 	protected int x;
 	protected int y;
 	

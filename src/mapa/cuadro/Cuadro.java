@@ -52,6 +52,8 @@ public class Cuadro {
 	public static final Cuadro MEDIO3 = new Cuadro(Sprite.MEDIO3, true);
 	public static final Cuadro MEDIO4 = new Cuadro(Sprite.MEDIO4, true);
 	public static final Cuadro CIELO = new Cuadro(Sprite.CIELO);
+	public static final Cuadro PIEDRA = new Cuadro(Sprite.PIEDRA);
+	public static final Cuadro FUEGO = new Cuadro(Sprite.FUEGO);
 	//Fin de la coleccion de cuadros
 	
 	public Cuadro(Sprite sprite) {
