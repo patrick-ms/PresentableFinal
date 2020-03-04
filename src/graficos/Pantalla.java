@@ -12,12 +12,7 @@ public final class Pantalla {
 	private int diferenciaY;
 	
 	public final int[] pixeles;
-	
-	//Temporal
-//	private final static int LADO_SPRITE = 32;
-//	private final static int MASCARA_SPRITE = LADO_SPRITE - 1;
-	//Fin Temporal
-	
+
 	public Pantalla(final int ancho, final int alto) {
 		this.ancho = ancho;
 		this.alto = alto;
@@ -30,7 +25,7 @@ public final class Pantalla {
 			pixeles[i] = 0;
 		}
 	}
-	// compensacion --> en que medida se ha desplazado el mapa respecto a la pantalla con nuestro personaje
+
 	public void mostrarCuadro(int compensacionX, int compensacionY, Cuadro cuadro) {
 		compensacionX -= diferenciaX;
 		compensacionY -= diferenciaY;
@@ -39,7 +34,7 @@ public final class Pantalla {
 			int posicionY = y + compensacionY;
 			for(int x = 0; x < cuadro.sprite.getLado(); x++) {
 				int posicionX = x + compensacionX;
-				//Para evitar dibujar fuera de pantalla
+
 				if(posicionX < -cuadro.sprite.getLado() || posicionX >= ancho || posicionY < 0|| posicionY >= alto) {
 					break;
 				}
@@ -48,8 +43,8 @@ public final class Pantalla {
 				}
 				
 				int colorPixelCuadro = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
-				//diferente del color blanco, se puede omitir el else si el fondo restante del sprite es negro
-				if(colorPixelCuadro != 0xffffffff) {
+
+				if(colorPixelCuadro != 0xffffffff && colorPixelCuadro != 0xff1c1b1b) {
 					pixeles[posicionX + posicionY * ancho] = colorPixelCuadro;
 				} else {
 					pixeles[posicionX + posicionY * ancho] = 0xff000000;
@@ -66,7 +61,7 @@ public final class Pantalla {
 			int posicionY = y + compensacionY;
 			for(int x = 0; x < jugador.getSprite().getLado(); x++) {
 				int posicionX = x + compensacionX;
-				//Para evitar dibujar fuera de pantalla
+	
 				if(posicionX < -jugador.getSprite().getLado() || posicionX >= ancho || posicionY < 0|| posicionY >= alto) {
 					break;
 				}

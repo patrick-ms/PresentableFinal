@@ -22,8 +22,8 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static final int ANCHO = 1280; 
-	private static final int ALTO = 720; //12*32
+	private static final int ANCHO = 800;
+	private static final int ALTO = 480; 
 	
 	private static volatile boolean enFuncionamiento = false;
 	
@@ -31,7 +31,7 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static String CONTADOR_APS = "";
 	private static String CONTADOR_FPS = "";
-	//aps y fps para estudiar el rendimiento del juego
+
 	private static int aps = 0;
 	private static int fps = 0;
 	
@@ -54,23 +54,19 @@ public class Juego extends Canvas implements Runnable{
 		setPreferredSize(new Dimension(ANCHO, ALTO));
 		
 		pantalla = new Pantalla(ANCHO, ALTO);
-		//128 tiles ancho y alto
-//		mapa = new MapaGenerado(128, 128);
 
 		teclado = new Teclado();
 		addKeyListener(teclado);
 		
-		mapa = new MapaCargado("/mapas/mapaPrueba2.png");
-		jugador = new Jugador(teclado, Sprite.PARADODERECHA, 155, 286);
+		mapa = new MapaCargado("/mapas/mapaColor.png");
+		jugador = new Jugador(teclado, Sprite.PARADODERECHA, 144, 348);
 		
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ventana.setResizable(false);
 		ventana.setLayout(new BorderLayout());
 		ventana.add(this, BorderLayout.CENTER);
-		//Sin borde 
-		ventana.setUndecorated(true);
-		ventana.pack();
+		ventana.pack(); 
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
 	}
@@ -111,24 +107,17 @@ public class Juego extends Canvas implements Runnable{
 	
 	private void mostrar () {
 		BufferStrategy estrategia = getBufferStrategy();
-		
-		//3 -> como cola de imagenes
+
 		if(estrategia == null) {
-			createBufferStrategy(3);
+			createBufferStrategy(3); 
 			return;
 		}
-		
-		// pantalla.limpiar();
+
 		mapa.mostar(jugador.getposicionX() - pantalla.getAncho() / 2 + jugador.getSprite().getLado() / 2, jugador.getposicionY() - pantalla.getAlto() / 2 + jugador.getSprite().getLado() / 2, pantalla);
 		jugador.mostrar(pantalla);
-		//metodo menos costoso para el ordenador
+	
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
-		
-		//for(int i = 0; i < pixeles.length; i++) {
-		//pixeles[i] = pantalla.pixeles[i];
-		//}
-		
-		//Dibujara lo que este dentro de estrategia es decir el Buffer
+
 		Graphics g = estrategia.getDrawGraphics();
 		
 		g.drawImage(imagen, 0, 0, getWidth(), getHeight(), null);
@@ -145,8 +134,6 @@ public class Juego extends Canvas implements Runnable{
 	}
 
 	public void run() {
-		// NS --> Nanosegundos
-		// APS --> Actualizaciones por segundo
 		final int NS_POR_SEGUNDO = 1000000000;
 		final byte APS_OBJETIVO = 60;
 		final double NS_POR_ACTUALIZACION = NS_POR_SEGUNDO / APS_OBJETIVO;

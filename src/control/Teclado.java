@@ -16,7 +16,6 @@ public class Teclado implements KeyListener{
 	public boolean salir;
 	
 	public void actualizar() {
-		//arriba y abajo no necesario
 		arriba = teclas[KeyEvent.VK_W];
 		abajo = teclas[KeyEvent.VK_S];
 		izquierda = teclas[KeyEvent.VK_A];

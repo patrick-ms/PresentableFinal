@@ -37,10 +37,10 @@ public class Jugador extends Criatura{
 			desplazamientoY++;
 		}
 		if(teclado.izquierda) {
-			desplazamientoX = desplazamientoX - 100;
+			desplazamientoX--;;
 		}
 		if(teclado.derecha) {
-			desplazamientoX = desplazamientoX + 100;
+			desplazamientoX++;
 		}
 		
 		if(desplazamientoX != 0 || desplazamientoY != 0) {
@@ -52,10 +52,10 @@ public class Jugador extends Criatura{
 		
 		if(direccion !=0 || desplazamientoY != 0) {
 			if(direccion == 'n') {
-				//sprite = Sprite.ARRIBA0;
+				
 			}
 			if(direccion == 's') {
-				//sprite = Sprite.ABAJO0;
+			
 			}
 			if(direccion == 'w') {
 				sprite = Sprite.PARADOPIZQUIERDA;
