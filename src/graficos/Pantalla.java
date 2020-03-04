@@ -44,7 +44,7 @@ public final class Pantalla {
 				
 				int colorPixelCuadro = cuadro.sprite.pixeles[x + y * cuadro.sprite.getLado()];
 
-				if(colorPixelCuadro != 0xffffffff && colorPixelCuadro != 0xff1c1b1b) {
+				if(colorPixelCuadro != 0xffffffff) {
 					pixeles[posicionX + posicionY * ancho] = colorPixelCuadro;
 				} else {
 					pixeles[posicionX + posicionY * ancho] = 0xff000000;

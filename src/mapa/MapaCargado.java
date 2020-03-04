@@ -177,6 +177,10 @@ public class MapaCargado extends Mapa{
 			case 0xff3218a3: 
 				cuadrosCatalogo[i] = Cuadro.MEDIO4;
 				continue;
+				
+			case 0xff1c1b1b: 
+				cuadrosCatalogo[i] = Cuadro.CIELO;
+				continue;	
 			
 			default:
 				cuadrosCatalogo[i] = Cuadro.VACIO;

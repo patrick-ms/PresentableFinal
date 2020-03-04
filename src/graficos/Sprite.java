@@ -56,6 +56,7 @@ public final class Sprite {
 	public static final Sprite MEDIO2 = new Sprite(32, 3, 3, HojaSprites.mapa01);
 	public static final Sprite MEDIO3 = new Sprite(32, 4, 3, HojaSprites.mapa01);
 	public static final Sprite MEDIO4 = new Sprite(32, 5, 3, HojaSprites.mapa01);
+	public static final Sprite CIELO = new Sprite(32, 6, 3, HojaSprites.mapa01);
 	//Fin de la coleccion
 	
 	//Coleccion de sprites del enemigo

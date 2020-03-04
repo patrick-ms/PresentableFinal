@@ -52,4 +52,12 @@ public abstract class Mapa {
 		}
 	}
 	
+	public Cuadro getCuadroCatalogo(int posicion) {
+		return cuadrosCatalogo[posicion];
+	}
+	
+	public int getAncho() {
+		return ancho;
+	}
+	
 }
