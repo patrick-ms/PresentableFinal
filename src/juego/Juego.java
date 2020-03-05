@@ -12,6 +12,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import control.Teclado;
+import entes.criatura.Enemigo;
 import entes.criatura.Jugador;
 import graficos.Pantalla;
 import graficos.Sprite;
@@ -24,10 +25,10 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static final int ANCHO = 800;
 	private static final int ALTO = 480; 
-	
+	private static boolean colisionEnemigo = false;
 	private static volatile boolean enFuncionamiento = false;
 	
-	private static final String NOMBRE = "Game";
+	private static final String NOMBRE = "CowDog";
 	
 	private static String CONTADOR_APS = "";
 	private static String CONTADOR_FPS = "";
@@ -45,6 +46,14 @@ public class Juego extends Canvas implements Runnable{
 	
 	private static Mapa mapa;
 	private static Jugador jugador;
+	private static Enemigo enemigo;
+	private static Enemigo enemigo2;
+	private static Enemigo enemigo3;
+	private static Enemigo enemigo4;
+	private static Enemigo enemigo5;
+	private static Enemigo enemigo6;
+	private static Enemigo enemigo7;
+	private static Enemigo enemigo8;
 	
 	private static BufferedImage imagen = new BufferedImage(ANCHO, ALTO, BufferedImage.TYPE_INT_RGB);
 	
@@ -59,7 +68,15 @@ public class Juego extends Canvas implements Runnable{
 		addKeyListener(teclado);
 		
 		mapa = new MapaCargado("/mapas/mapaColor.png");
-		jugador = new Jugador(mapa, teclado, Sprite.PARADODERECHA, 144, 348);
+		jugador = new Jugador(mapa, teclado, Sprite.PARADODERECHA, 425,288);
+		enemigo = new Enemigo(mapa,  Sprite.POLICIAPARADO, 850, 288);
+		enemigo2 = new Enemigo(mapa, Sprite.POLICIAPARADO, 250, 380);
+		enemigo3 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 500,0);
+		enemigo4 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 1530,0);
+		enemigo5 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 1570,380);
+		enemigo6 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 2800,0);
+		enemigo7 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 2000,191);
+		enemigo8 = new Enemigo(mapa,  Sprite.POLICIAPARADO, 2600,0);
 		
 		ventana = new JFrame(NOMBRE);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +91,7 @@ public class Juego extends Canvas implements Runnable{
 	public static void main(String[] args) {
 		Juego juego = new Juego();
 		juego.iniciar();
+		
 	}
 	
 	private synchronized void iniciar() {
@@ -84,7 +102,7 @@ public class Juego extends Canvas implements Runnable{
 	}
 	
 	private synchronized void detener() {
-		enFuncionamiento = true;
+		enFuncionamiento = false;
 		
 		try {
 			thread.join();
@@ -95,7 +113,14 @@ public class Juego extends Canvas implements Runnable{
 	
 	private void actualizar() {
 		teclado.actualizar();
-		
+		enemigo.moverCostado(2,800,1100);
+		enemigo2.moverCostado(2,250 ,402);
+		enemigo3.moverArriba(2,0,280);
+		enemigo4.moverArriba(2,0,220);
+		enemigo5.moverCostado(2,1570 ,1700);
+		enemigo6.moverArriba(2,0,380);
+		enemigo7.moverCostado(2,2000,2300);
+		enemigo8.moverArriba(2,0,190);
 		jugador.actualizar();
 		
         if(teclado.salir) {
@@ -114,8 +139,16 @@ public class Juego extends Canvas implements Runnable{
 		}
 
 		mapa.mostar(jugador.getposicionX() - pantalla.getAncho() / 2 + jugador.getSprite().getLado() / 2, jugador.getposicionY() - pantalla.getAlto() / 2 + jugador.getSprite().getLado() / 2, pantalla);
-		jugador.mostrar(pantalla);
-	
+		
+		enemigo.mostrar(pantalla,jugador);
+		enemigo2.mostrar(pantalla,jugador);
+		enemigo3.mostrar(pantalla,jugador);	
+		enemigo4.mostrar(pantalla,jugador);	
+		enemigo5.mostrar(pantalla,jugador);	
+		enemigo6.mostrar(pantalla,jugador);	
+		enemigo7.mostrar(pantalla,jugador);	
+		enemigo8.mostrar(pantalla,jugador);
+		jugador.mostrar(pantalla,enemigo,enemigo2,enemigo3,enemigo4,enemigo5,enemigo6,enemigo7);
 		System.arraycopy(pantalla.pixeles, 0, pixeles, 0, pixeles.length);
 
 		Graphics g = estrategia.getDrawGraphics();
@@ -146,6 +179,7 @@ public class Juego extends Canvas implements Runnable{
 		
 		requestFocus();
 		
+
 		while(enFuncionamiento) {
 			final long inicioBucle = System.nanoTime();
 			

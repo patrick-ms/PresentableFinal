@@ -1,5 +1,6 @@
 package graficos;
 
+import entes.criatura.Enemigo;
 import entes.criatura.Jugador;
 import mapa.cuadro.Cuadro;
 
@@ -7,6 +8,7 @@ public final class Pantalla {
 	
 	private final int ancho;
 	private final int alto;
+	
 	
 	private int diferenciaX;
 	private int diferenciaY;
@@ -70,6 +72,30 @@ public final class Pantalla {
 				}
 				
 				int colorPixelJugador = jugador.getSprite().pixeles[x + y * jugador.getSprite().getLado()];
+				if(colorPixelJugador != 0xffff00ff) {
+					pixeles[posicionX + posicionY * ancho] = colorPixelJugador;
+				}
+			}
+		}
+	}
+	
+	public void mostrarEnemigo(int compensacionX, int compensacionY, Enemigo enemigo) {
+		compensacionX -= diferenciaX;
+		compensacionY -= diferenciaY;
+		
+		for(int y = 0; y < enemigo.getSprite().getLado(); y++) {
+			int posicionY = y + compensacionY;
+			for(int x = 0; x < enemigo.getSprite().getLado(); x++) {
+				int posicionX = x + compensacionX;
+	
+				if(posicionX < -enemigo.getSprite().getLado() || posicionX >= ancho || posicionY < 0|| posicionY >= alto) {
+					break;
+				}
+				if(posicionX < 0) {
+					posicionX = 0;
+				}
+				
+				int colorPixelJugador = enemigo.getSprite().pixeles[x + y * enemigo.getSprite().getLado()];
 				if(colorPixelJugador != 0xffff00ff) {
 					pixeles[posicionX + posicionY * ancho] = colorPixelJugador;
 				}

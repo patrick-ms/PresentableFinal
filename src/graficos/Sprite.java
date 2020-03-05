@@ -8,8 +8,9 @@ public final class Sprite {
 	
 	public int[] pixeles;
 	private HojaSprites hoja;
-	
+
 	//Coleccion de sprites del personaje
+	public static final Sprite POLICIAPARADO = new Sprite(32, 0, 0, HojaSprites.enemigo);
 	public static final Sprite PARADODERECHA = new Sprite(32, 1, 0, HojaSprites.jugador);
 	public static final Sprite CORRERDERECHA1 = new Sprite(32, 1, 1, HojaSprites.jugador);
 	public static final Sprite CORRERDERECHA2 = new Sprite(32, 1, 2, HojaSprites.jugador);	
@@ -57,10 +58,8 @@ public final class Sprite {
 	public static final Sprite MEDIO3 = new Sprite(32, 4, 3, HojaSprites.mapa01);
 	public static final Sprite MEDIO4 = new Sprite(32, 5, 3, HojaSprites.mapa01);
 	public static final Sprite CIELO = new Sprite(32, 6, 3, HojaSprites.mapa01);
-	//Fin de la coleccion
-	
-	//Coleccion de sprites del enemigo
-	
+	public static final Sprite PIEDRA = new Sprite(32, 7, 3, HojaSprites.mapa01);
+	public static final Sprite FUEGO = new Sprite(32, 8, 3, HojaSprites.mapa01);
 	//Fin de la coleccion
 	
 	public Sprite(final int lado, final int columna, final int fila, final HojaSprites hoja) {
